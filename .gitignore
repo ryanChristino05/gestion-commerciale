@@ -1,0 +1,19 @@
+# Build
+bin/
+obj/
+
+# Secrets
+appsettings.json
+appsettings.*.json
+.env
+
+# Visual Studio
+.vs/
+*.user
+
+# Docker
+.dockerignore
+
+# OS
+.DS_Store
+Thumbs.db
