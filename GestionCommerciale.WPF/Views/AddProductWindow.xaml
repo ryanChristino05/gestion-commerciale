@@ -1,0 +1,96 @@
+﻿ <Window x:Class="GestionCommerciale.WPF.Views.AddProductWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Nouveau produit"
+        Height="650"
+            Width="600"
+            MinHeight="600"
+            MinWidth="550"
+            WindowStartupLocation="CenterOwner"
+            ResizeMode="CanResize"
+        Background="#F5F5F5">
+
+    <Grid Margin="28">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <TextBlock Grid.Row="0"
+                   Text="Ajouter un produit"
+                   FontSize="22"
+                   FontWeight="Bold"
+                   Foreground="#333333"
+                   Margin="0,0,0,20"/>
+
+        <StackPanel Grid.Row="1">
+
+            <TextBlock Text="Référence"/>
+            <TextBox x:Name="TxtReference"
+                     Height="34"
+                     Margin="0,5,0,12"
+                     Padding="8"/>
+
+            <TextBlock Text="Nom du produit"/>
+            <TextBox x:Name="TxtName"
+                     Height="34"
+                     Margin="0,5,0,12"
+                     Padding="8"/>
+
+            <TextBlock Text="Prix unitaire (Ar)"/>
+            <TextBox x:Name="TxtUnitPrice"
+                     Height="34"
+                     Margin="0,5,0,12"
+                     Padding="8"/>
+
+            <TextBlock Text="Unité (ex. pièce, kg, litre)"/>
+            <TextBox x:Name="TxtUnit"
+                     Height="34"
+                     Margin="0,5,0,12"
+                     Padding="8"/>
+
+            <TextBlock Text="Stock initial"/>
+            <TextBox x:Name="TxtStockQuantity"
+                     Height="34"
+                     Margin="0,5,0,12"
+                     Padding="8"
+                     Text="0"/>
+
+            <TextBlock Text="Seuil d'alerte de stock"/>
+            <TextBox x:Name="TxtAlertThreshold"
+                     Height="34"
+                     Margin="0,5,0,12"
+                     Padding="8"
+                     Text="5"/>
+
+            <TextBlock x:Name="TxtError"
+                       Foreground="#CC0000"
+                       TextWrapping="Wrap"
+                       Margin="0,4,0,0"/>
+
+        </StackPanel>
+
+        <StackPanel Grid.Row="2"
+                    Orientation="Horizontal"
+                    HorizontalAlignment="Right"
+                    Margin="0,18,0,0">
+
+            <Button Content="Annuler"
+                    Width="100"
+                    Height="36"
+                    Margin="0,0,10,0"
+                    Click="BtnCancel_Click"/>
+
+            <Button x:Name="BtnSave"
+                    Content="Enregistrer"
+                    Width="120"
+                    Height="36"
+                    Background="#333333"
+                    Foreground="White"
+                    BorderThickness="0"
+                    Click="BtnSave_Click"/>
+
+        </StackPanel>
+    </Grid>
+</Window>

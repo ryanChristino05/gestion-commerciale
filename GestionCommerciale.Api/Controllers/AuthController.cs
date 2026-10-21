@@ -6,6 +6,7 @@ using System.Text;
 using GestionCommerciale.Api.Data;
 using GestionCommerciale.Api.Models;
 using BCrypt.Net;
+using Microsoft.AspNetCore.Authorization;
 
 namespace GestionCommerciale.Api.Controllers;
 
@@ -30,24 +31,23 @@ public class AuthController : ControllerBase
     }
 
     [HttpPost("register")]
+    [HttpPost("register")]
     public async Task<IActionResult> Register([FromBody] UserDto dto)
     {
         if (_db.Users.Any(u => u.Username == dto.Username))
             return BadRequest("Ce nom d'utilisateur est déjà pris.");
 
-        var role = dto.Role == "Admin" ? Role.Admin : Role.Seller;
-
         var user = new User
         {
             Username = dto.Username,
             PasswordHash = BCrypt.Net.BCrypt.HashPassword(dto.Password),
-            Role = role
+            Role = Role.Seller   // ← toujours Seller, le champ dto.Role est ignoré
         };
 
         _db.Users.Add(user);
         await _db.SaveChangesAsync();
 
-        return Ok("Compte créé avec succès.");
+        return Ok("Compte vendeur créé avec succès.");
     }
 
     [HttpPost("login")]
@@ -84,5 +84,26 @@ public class AuthController : ControllerBase
         );
 
         return new JwtSecurityTokenHandler().WriteToken(token);
+    }
+    [HttpPost("create-user")]
+    [Authorize(Roles = "Admin")]
+    public async Task<IActionResult> CreateUser([FromBody] UserDto dto)
+    {
+        if (_db.Users.Any(u => u.Username == dto.Username))
+            return BadRequest("Ce nom d'utilisateur est déjà pris.");
+
+        var role = dto.Role == "Admin" ? Role.Admin : Role.Seller;
+
+        var user = new User
+        {
+            Username = dto.Username,
+            PasswordHash = BCrypt.Net.BCrypt.HashPassword(dto.Password),
+            Role = role
+        };
+
+        _db.Users.Add(user);
+        await _db.SaveChangesAsync();
+
+        return Ok($"Compte {role} créé avec succès.");
     }
 }

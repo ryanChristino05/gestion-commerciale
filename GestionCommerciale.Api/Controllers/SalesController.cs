@@ -105,7 +105,9 @@ public class SalesController : ControllerBase
         var client = await _db.Clients.FindAsync(dto.ClientId);
         if (client == null || client.IsArchived)
             return BadRequest("Client introuvable.");
-
+        // Vérifier que chaque quantité est strictement positive
+        if (dto.Items.Any(item => item.Quantity <= 0))
+            return BadRequest("La quantité doit être supérieure à zéro.");
         // Vérifier que les lignes ne sont pas vides
         if (dto.Items == null || dto.Items.Count == 0)
             return BadRequest("La vente doit contenir au moins une ligne.");

@@ -1,0 +1,128 @@
+﻿<Page x:Class="GestionCommerciale.WPF.Views.ProductsPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:converters="clr-namespace:GestionCommerciale.WPF.Converters"
+      Title="Produits" Background="#F5F5F5">
+    <Page.Resources>
+        <converters:BoolToStockConverter
+        x:Key="BoolToStockConverter"/>
+
+        <converters:BoolToColorConverter
+        x:Key="BoolToColorConverter"/>
+    </Page.Resources>
+    <Grid Margin="24">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <!-- En-tête -->
+        <TextBlock Grid.Row="0" Text="Produits"
+                   FontSize="20" FontWeight="SemiBold"
+                   Foreground="#2D2D2D" Margin="0,0,0,20"/>
+
+        <!-- Barre de recherche + bouton -->
+        <Grid Grid.Row="1" Margin="0,0,0,16">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+
+            <TextBox Grid.Column="0" x:Name="TxtSearch"
+                     Height="34" FontSize="13" Padding="10,6"
+                     Background="White" BorderBrush="#CCCCCC"
+                     VerticalContentAlignment="Center"
+                     TextChanged="TxtSearch_TextChanged"/>
+
+            <Button Grid.Column="1" Content="Rechercher"
+                    Height="34" Padding="14,0" Margin="8,0,0,0"
+                    Background="#555555" Foreground="White"
+                    BorderThickness="0" Cursor="Hand"
+                    Click="BtnSearch_Click"/>
+
+            <Button Grid.Column="2" x:Name="BtnAdd"
+                    Content="+ Nouveau"
+                    Height="34" Padding="14,0" Margin="8,0,0,0"
+                    Background="#333333" Foreground="White"
+                    BorderThickness="0" Cursor="Hand"
+                    Click="BtnAdd_Click"/>
+        </Grid>
+
+        <!-- Liste des produits -->
+        <!-- Liste des produits -->
+        <DataGrid Grid.Row="2" x:Name="ProductsGrid"
+          AutoGenerateColumns="False"
+          IsReadOnly="True"
+          GridLinesVisibility="Horizontal"
+          Background="White"
+          BorderBrush="#DDDDDD"
+          RowHeight="36"
+          FontSize="13"
+          SelectionMode="Single"
+          CanUserResizeRows="False"
+          HeadersVisibility="Column">
+
+            <DataGrid.ColumnHeaderStyle>
+                <Style TargetType="DataGridColumnHeader">
+                    <Setter Property="Background" Value="#EEEEEE"/>
+                    <Setter Property="Foreground" Value="#333333"/>
+                    <Setter Property="FontWeight" Value="SemiBold"/>
+                    <Setter Property="Padding" Value="10,8"/>
+                    <Setter Property="BorderBrush" Value="#DDDDDD"/>
+                    <Setter Property="BorderThickness" Value="0,0,0,1"/>
+                </Style>
+            </DataGrid.ColumnHeaderStyle>
+
+            <DataGrid.Columns>
+
+                <DataGridTextColumn Header="Référence"
+                            Binding="{Binding Reference}"
+                            Width="130"/>
+
+                <DataGridTextColumn Header="Nom"
+                            Binding="{Binding Name}"
+                            Width="*"/>
+
+                <DataGridTextColumn Header="Prix unitaire"
+                            Binding="{Binding UnitPrice, StringFormat={}{0:N0} Ar}"
+                            Width="130">
+                    <DataGridTextColumn.ElementStyle>
+                        <Style TargetType="TextBlock">
+                            <Setter Property="HorizontalAlignment" Value="Right"/>
+                            <Setter Property="Padding" Value="0,0,10,0"/>
+                        </Style>
+                    </DataGridTextColumn.ElementStyle>
+                </DataGridTextColumn>
+
+                <DataGridTextColumn Header="Unité"
+                            Binding="{Binding Unit}"
+                            Width="80"/>
+
+                <DataGridTextColumn Header="Stock"
+                            Binding="{Binding StockQuantity}"
+                            Width="80">
+                    <DataGridTextColumn.ElementStyle>
+                        <Style TargetType="TextBlock">
+                            <Setter Property="HorizontalAlignment" Value="Center"/>
+                        </Style>
+                    </DataGridTextColumn.ElementStyle>
+                </DataGridTextColumn>
+
+                <DataGridTemplateColumn Header="État stock" Width="110">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding IsLowStock, Converter={StaticResource BoolToStockConverter}}"
+                               Foreground="{Binding IsLowStock, Converter={StaticResource BoolToColorConverter}}"
+                               FontWeight="SemiBold"
+                               HorizontalAlignment="Center"
+                               VerticalAlignment="Center"/>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+
+            </DataGrid.Columns>
+        </DataGrid>
+    </Grid>
+</Page>

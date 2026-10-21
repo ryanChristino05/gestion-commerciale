@@ -169,4 +169,36 @@ public class SalesTests
 
         Assert.IsType<ForbidResult>(cancelResult);
     }
+
+    // Test 5 : Quantité négative → 400, stock inchangé
+    [Fact]
+    public async Task Create_QuantiteNegative_Retourne400()
+    {
+        var db = CreateDb();
+        var (user, product, client) = await SeedData(db);
+        var controller = CreateController(db, user.Id, "Seller");
+
+        var dto = new CreateSaleDto
+        {
+            ClientId = client.Id,
+            Items = new List<SaleItemDto>
+            {
+                new SaleItemDto
+                {
+                    ProductId = product.Id,
+                    Quantity = -5
+                }
+            }
+        };
+
+        var result = await controller.Create(dto);
+
+        Assert.IsType<BadRequestObjectResult>(result);
+
+        var updatedProduct = await db.Products.FindAsync(product.Id);
+        Assert.Equal(50, updatedProduct!.StockQuantity);
+
+        Assert.Empty(await db.Sales.ToListAsync());
+    }
+
 }
