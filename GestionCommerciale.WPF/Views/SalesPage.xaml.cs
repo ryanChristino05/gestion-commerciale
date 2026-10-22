@@ -330,7 +330,7 @@ public partial class SalesPage : Page
             ApiService.Role, "Admin",
             StringComparison.OrdinalIgnoreCase);
 
-        0bool isValidated = _selectedSale.Status == 0;
+        bool isValidated = _selectedSale.Status == 0;
 
         CancelSaleButton.IsEnabled = isAdmin && isValidated;
     }

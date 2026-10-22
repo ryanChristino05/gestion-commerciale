@@ -131,6 +131,13 @@ public class ApiService
         var response = await PostAsync($"/sales/{saleId}/cancel", new { reason });
         return response.IsSuccessStatusCode;
     }
+    // UTILISATEURS
+    public async Task<(bool success, string message)> CreateUserAsync(string username, string password, string role)
+    {
+        var response = await PostAsync("/auth/create-user", new { username, password, role });
+        var body = await response.Content.ReadAsStringAsync();
+        return (response.IsSuccessStatusCode, body);
+    }
 }
 
 // DTOs internes

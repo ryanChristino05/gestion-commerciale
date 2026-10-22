@@ -35,7 +35,9 @@
                     Click="BtnClients_Click"/>
             <Button Content="Ventes" Style="{StaticResource MenuButton}"
                     Click="BtnVentes_Click"/>
-
+            <Button Content="Utilisateurs" Style="{StaticResource MenuButton}"
+                    x:Name="BtnUsersMenu" Click="BtnUsers_Click"/>
+            
             <Rectangle Height="1" Fill="#444444" Margin="16,16"/>
 
             <Button Content="Déconnexion" Style="{StaticResource MenuButton}"

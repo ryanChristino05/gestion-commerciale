@@ -1,0 +1,51 @@
+﻿<Page x:Class="GestionCommerciale.WPF.Views.UsersPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      Title="Utilisateurs" Background="#F5F5F5">
+    <Grid Margin="24">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <TextBlock Grid.Row="0" Text="Créer un utilisateur"
+                   FontSize="20" FontWeight="SemiBold"
+                   Foreground="#2D2D2D" Margin="0,0,0,20"/>
+
+        <Border Grid.Row="1" Background="White"
+                BorderBrush="#DDDDDD" BorderThickness="1"
+                Padding="20" Width="400" HorizontalAlignment="Left">
+            <StackPanel>
+
+                <TextBlock Text="Nom d'utilisateur" FontSize="12" Foreground="#555555" Margin="0,0,0,4"/>
+                <TextBox x:Name="TxtUsername" Height="34" Padding="10,6"
+                         Background="White" BorderBrush="#CCCCCC"
+                         VerticalContentAlignment="Center" Margin="0,0,0,12"/>
+
+                <TextBlock Text="Mot de passe" FontSize="12" Foreground="#555555" Margin="0,0,0,4"/>
+                <PasswordBox x:Name="TxtPassword" Height="34" Padding="10,6"
+                             Background="White" BorderBrush="#CCCCCC"
+                             VerticalContentAlignment="Center" Margin="0,0,0,12"/>
+
+                <TextBlock Text="Rôle" FontSize="12" Foreground="#555555" Margin="0,0,0,4"/>
+                <ComboBox x:Name="CbRole" Height="34" Margin="0,0,0,16"
+                          SelectedIndex="0">
+                    <ComboBoxItem Content="Seller"/>
+                    <ComboBoxItem Content="Admin"/>
+                </ComboBox>
+
+                <TextBlock x:Name="TxtMessage"
+                           FontSize="13" Margin="0,0,0,12"
+                           TextWrapping="Wrap"
+                           Visibility="Collapsed"/>
+
+                <Button x:Name="BtnCreate" Content="Créer le compte"
+                        Height="34" Padding="14,0"
+                        Background="#333333" Foreground="White"
+                        BorderThickness="0" Cursor="Hand"
+                        HorizontalAlignment="Left"
+                        Click="BtnCreate_Click"/>
+            </StackPanel>
+        </Border>
+    </Grid>
+</Page>

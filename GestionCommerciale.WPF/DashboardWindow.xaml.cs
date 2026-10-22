@@ -15,7 +15,11 @@ public partial class DashboardWindow : Window
 
         // Cacher le bouton Stock si Seller
         if (ApiService.Role != "Admin")
+        {
             BtnStockMenu.Visibility = Visibility.Collapsed;
+            BtnUsersMenu.Visibility = Visibility.Collapsed;
+        }
+           
 
         // Page par défaut
         MainFrame.Navigate(new ProductsPage());
@@ -43,4 +47,6 @@ public partial class DashboardWindow : Window
 
         this.Close();
     }
+    private void BtnUsers_Click(object sender, RoutedEventArgs e)
+    => MainFrame.Navigate(new UsersPage());
 }
