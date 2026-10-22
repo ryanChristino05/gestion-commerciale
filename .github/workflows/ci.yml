@@ -20,10 +20,10 @@ jobs:
           dotnet-version: '10.0.x'
 
       - name: Restaurer les dépendances
-        run: dotnet restore GestionCommerciale.slnx
+        run: dotnet restore GestionCommerciale.Api/GestionCommerciale.Api.csproj
 
-      - name: Build
-        run: dotnet build GestionCommerciale.slnx --no-restore --configuration Release
+      - name: Build de l'API
+        run: dotnet build GestionCommerciale.Api/GestionCommerciale.Api.csproj --no-restore --configuration Release
 
       - name: Lancer les tests
-        run: dotnet test GestionCommerciale.Tests --no-build --configuration Release --verbosity normal
+        run: dotnet test GestionCommerciale.Tests/GestionCommerciale.Tests.csproj --configuration Release --verbosity normal
