@@ -31,7 +31,6 @@ public class AuthController : ControllerBase
     }
 
     [HttpPost("register")]
-    [HttpPost("register")]
     public async Task<IActionResult> Register([FromBody] UserDto dto)
     {
         if (_db.Users.Any(u => u.Username == dto.Username))
