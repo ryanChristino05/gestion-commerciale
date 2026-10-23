@@ -1,4 +1,5 @@
 # Système de Gestion Commerciale
+![CI](https://github.com/ryanChristino05/gestion-commerciale/actions/workflows/ci.yml/badge.svg)
 
 Application de gestion commerciale complète (produits, stock, clients, ventes) composée d'une **API REST ASP.NET Core** et d'un **client bureau WPF**. Projet réalisé dans le cadre d'un portfolio pour la recherche de stage en développement.
 
