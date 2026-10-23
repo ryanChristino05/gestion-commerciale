@@ -1,4 +1,4 @@
-name: CI
+name: CI/CD
 
 on:
   push:
@@ -27,3 +27,12 @@ jobs:
 
       - name: Lancer les tests
         run: dotnet test GestionCommerciale.Tests/GestionCommerciale.Tests.csproj --configuration Release --verbosity normal
+
+  deploy:
+    needs: build-and-test
+    if: github.ref == 'refs/heads/master' && github.event_name == 'push'
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Déclencher le déploiement sur Render
+        run: curl -X POST "${{ secrets.RENDER_DEPLOY_HOOK }}"
