@@ -150,6 +150,17 @@ docker run -p 8080:8080 \
 - **Plan utilisé :** Render Free — le service se met en veille après 15 minutes d'inactivité (premier appel plus lent après une période de veille)
 
 ---
+## CI/CD
+
+Ce projet utilise GitHub Actions pour automatiser le build, les tests et le déploiement :
+
+1. À chaque push sur `master`, l'API est automatiquement compilée et les tests xUnit sont exécutés
+2. Si et seulement si tout passe, un déploiement est déclenché automatiquement sur [Render](https://render.com)
+3. Base de données PostgreSQL hébergée sur [Neon](https://neon.tech)
+
+```
+push → build → tests → déploiement automatique (si tout est vert)
+```
 
 ## Auteur
 
